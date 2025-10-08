@@ -29,4 +29,10 @@ public class Motoboy {
     public String getNomeMotoboy(){
         return nomeMotoboy;
     }
+
+    public void mostrarResumo(){
+        System.out.println("\nMotoboy: " + nomeMotoboy);
+        System.out.println("Entregas Realizadas: " + getQuantidadeEntregas());
+        System.out.println("Total a raceber: R$ " + calcularTotalEntregas());
+    }
 }
