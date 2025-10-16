@@ -1,6 +1,6 @@
 🚀 Sistema de Gestão de Pagas para Motoboys
 
-Sistema desenvolvido em Java para controle de entregas e gestão de pagamentos de motoboys contratados.
+Sistema em desenvolvimento em Java para controle de entregas e gestão de pagamentos de motoboys contratados.
 O projeto foi criado com o objetivo de organizar as informações financeiras, facilitar o controle de saldos, registrar pagamentos e integrar dados entre motoboys e administração.
 
 🧩 Funcionalidades Principais
