@@ -1,19 +1,12 @@
 public class Entrega {
 
-    int numeroComanda;
-    double valorEntrega;
+    private Comanda comanda;
 
-    public Entrega(int numeroComanda, double valorEntrega) {
-        this.numeroComanda = numeroComanda;
-        this.valorEntrega = valorEntrega;
+    public Entrega(Comanda comanda) {
+        this.comanda = comanda;
     }
 
-    public double getValorEntrega() {
-        return valorEntrega;
+    public Comanda getComanda() {
+        return comanda;
     }
-
-    public int getNumeroComanda() {
-        return numeroComanda;
-    }
-
 }

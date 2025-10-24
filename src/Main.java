@@ -42,7 +42,7 @@ public class Main {
     }
         public static void main (String[]args){
             Scanner sc = new Scanner(System.in);
-            List<Motoboy> motoboys = new ArrayList<>();
+            List<FechamentoMotoboy> fechamentoMotoboys = new ArrayList<>();
 
             char continuarMotoboy;
             System.out.println("==Sistema de Controle de Entregas==");
@@ -50,14 +50,14 @@ public class Main {
             do {
                 System.out.print("\nNome do Motoboy: ");
                 String nomeMotoboy = sc.nextLine();
-                Motoboy motoboy = new Motoboy(nomeMotoboy);
+                FechamentoMotoboy fechamentoMotoboy = new FechamentoMotoboy(nomeMotoboy);
 
                 System.out.print("\n---Registro de entregas para " + nomeMotoboy + "---\n");
 
                 while (true) {
                     int numeroComanda = lerInt(sc,"Numero da Comanda: ");
                     double valorEntrega = lerInt(sc,"Valor da entrega: ");
-                    motoboy.adicionarEntrega(new Entrega(numeroComanda, valorEntrega));
+                    fechamentoMotoboy.adicionarEntrega(new Entrega(numeroComanda, valorEntrega));
                     System.out.println("Entrega Registrada com Sucesso!!\n");
                     System.out.print("\nDeseja registrar outra entrega para esse motoboy? (s/n): ");
                     char continuarEntregas = sc.next().toLowerCase().charAt(0);
@@ -65,8 +65,8 @@ public class Main {
                     if (continuarEntregas != 's') break;
                 }
 
-                motoboy.mostrarResumo();
-                motoboys.add(motoboy);
+                fechamentoMotoboy.mostrarResumo();
+                fechamentoMotoboys.add(fechamentoMotoboy);
                 System.out.print("\nDeseja registrar outra entrega para outro motoboy? (s/n): ");
                 continuarMotoboy = sc.next().toLowerCase().charAt(0);
                 sc.nextLine();
@@ -75,7 +75,7 @@ public class Main {
                 System.out.println("==RELATORIO FINAL DO DIA==");
                 double totalGeral = 0;
                 int totalEntregasDia = 0;
-                for (Motoboy m : motoboys) {
+                for (FechamentoMotoboy m : fechamentoMotoboys) {
                     m.mostrarResumo();
                     totalGeral += m.calcularTotalEntregas();
                     totalEntregasDia += m.getQuantidadeEntregas();
