@@ -1,36 +1,45 @@
 package Model;
 
-import java.math.BigDecimal;
-
 public class Comanda {
 
-    private int numeroComanda;
+    private Integer numeroComanda;
     private Bairro bairro;
-    private BigDecimal valorEntrega;
     private String observacao;
 
-    public Comanda(int numeroComanda, Bairro bairro) {
+    public Comanda(Integer numeroComanda, Bairro bairro) {
+
+        if (numeroComanda == null || numeroComanda <= 0)
+            throw new IllegalArgumentException("Número da comanda inválido");
+
+        if (bairro == null)
+            throw new IllegalArgumentException("Bairro não informado");
+
         this.numeroComanda = numeroComanda;
         this.bairro = bairro;
-        this.valorEntrega = valorEntrega;
     }
 
-    public BigDecimal getValorEntrega() {
-        return valorEntrega;
+    public Integer getNumeroComanda() {
+        return numeroComanda;
     }
 
-    public void alterarBairro(Bairro novoBairro){
+    public Bairro getBairro() {
+        return bairro;
+    }
+
+    public void alterarBairro(Bairro novoBairro) {
+        if (novoBairro == null)
+            throw new IllegalArgumentException("Novo bairro inválido");
         this.bairro = novoBairro;
-        this.valorEntrega = BigDecimal.valueOf(novoBairro.getValorTaxa());
     }
 
-    public void  setObservacao(String observacao){
+    public void setObservacao(String observacao) {
         this.observacao = observacao;
     }
 
     @Override
     public String toString() {
-        return "Model.Comanda " + numeroComanda + "| Model.Bairro: " + bairro + (observacao != null ? " | Obs: " + observacao : "");
+        return "Comanda " + numeroComanda +
+                " | Bairro: " + bairro +
+                (observacao != null ? " | Obs: " + observacao : "");
     }
-
 }

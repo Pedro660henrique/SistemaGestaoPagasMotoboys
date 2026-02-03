@@ -1,7 +1,8 @@
 package Model;
 
-import Exceptions.BairroInvalidoException;
-import Service.InputUtils;
+import Model.Exceptions.BairroInvalidoException;
+import Model.Repository.CadastrarBairro;
+import Model.Utils.InputUtils;
 
 import java.util.Scanner;
 

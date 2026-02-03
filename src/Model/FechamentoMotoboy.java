@@ -7,52 +7,67 @@ import java.util.List;
 public class FechamentoMotoboy {
 
     private Motoboy motoboy;
-    private List<Entrega> entregas;
-    private BigDecimal caixinha;
+    private String horarioEntrada;
+    private String horarioSaida;
+    private BigDecimal paga;
+    private BigDecimal caixinha = BigDecimal.ZERO;
+    private List<Entrega> entregas = new ArrayList<>();
+    private boolean fechado = false;
 
-
-    public FechamentoMotoboy(Motoboy motoboy) {
+    public FechamentoMotoboy(
+            Motoboy motoboy,
+            String horarioEntrada,
+            String horarioSaida,
+            BigDecimal paga
+    ) {
         this.motoboy = motoboy;
-        this.entregas = new ArrayList<Entrega>();
-        this.caixinha = BigDecimal.ZERO;
+        this.horarioEntrada = horarioEntrada;
+        this.horarioSaida = horarioSaida;
+        this.paga = paga;
     }
 
-    public void adicionarEntrega(Entrega entrega){
-        if(entrega == null) throw new IllegalArgumentException("Model.Entrega não pode ser nula");
+    public void adicionarEntrega(Entrega entrega) {
+        if (fechado) {
+            throw new IllegalStateException("Fechamento já realizado");
+        }
         entregas.add(entrega);
     }
 
-    public void adicionarCaixinha(BigDecimal valor){
-        if(valor == null) throw new IllegalArgumentException("Caixinha não pode ser nula");
+    public void fechar() {
+        if (entregas.isEmpty()) {
+            throw new IllegalStateException("Não é possível fechar sem entregas");
+        }
+        this.fechado = true;
+    }
+
+    // AÇÕES PÓS-FECHAMENTO
+    public void adicionarCaixinha(BigDecimal valor) {
+        if (!fechado) {
+            throw new IllegalStateException("Fechamento ainda não realizado");
+        }
         this.caixinha = this.caixinha.add(valor);
     }
 
-    public BigDecimal totalEntregas(){
-        BigDecimal total = BigDecimal.ZERO;
-        for(Entrega e : entregas){
-            total = total.add(e.getValor());
+    public void alterarPaga(BigDecimal novaPaga) {
+        if (!fechado) {
+            throw new IllegalStateException("Fechamento ainda não realizado");
         }
-        return total;
-    }
-
-    public BigDecimal totalGeral(){
-        return totalEntregas().add(caixinha);
+        this.paga = novaPaga;
     }
 
     public int getQuantidadeEntregas() {
         return entregas.size();
     }
 
-    public void imprimirRelatorio(){
-        System.out.println("Model.Motoboy: " + motoboy.getNome());
-        System.out.println("Entregas: " + entregas.size());
-
-        for (Entrega e : entregas) {
-            System.out.println(e);
-        }
-
-        System.out.println("Total entregas: R$ " + totalEntregas());
-        System.out.println("Caixinha: R$ " + caixinha);
-        System.out.println("TOTAL GERAL: R$ " + totalGeral());
-        }
+    public BigDecimal getTotalReceber() {
+        return paga.add(caixinha);
     }
+
+    public Motoboy getMotoboy() {
+        return motoboy;
+    }
+
+    public boolean isFechado() {
+        return fechado;
+    }
+}

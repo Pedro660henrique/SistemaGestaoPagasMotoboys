@@ -1,4 +1,6 @@
-package Model;
+package Model.Repository;
+
+import Model.Motoboy;
 
 import java.util.ArrayList;
 import java.util.List;

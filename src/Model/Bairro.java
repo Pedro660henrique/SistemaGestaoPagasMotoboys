@@ -1,27 +1,37 @@
 package Model;
 
+import Model.Exceptions.BairroInvalidoException;
+import java.math.BigDecimal;
+
 public class Bairro {
 
-    private int id;
+    private Integer id;
     private String nome;
-    private Double valorTaxa;
+    private BigDecimal valorTaxa;
 
-    public Bairro(int id, String nome, Double valorTaxa) {
+    public Bairro(Integer id, String nome, BigDecimal valorTaxa) {
+
+        if (nome == null || nome.isBlank())
+            throw new BairroInvalidoException("Nome do bairro inválido");
+
+        if (valorTaxa == null || valorTaxa.compareTo(BigDecimal.ZERO) <= 0)
+            throw new BairroInvalidoException("Valor do bairro inválido");
+
         this.id = id;
         this.nome = nome;
         this.valorTaxa = valorTaxa;
+    }
+
+    public Integer getId() {
+        return id;
     }
 
     public String getNome() {
         return nome;
     }
 
-    public Double getValorTaxa() {
+    public BigDecimal getValorTaxa() {
         return valorTaxa;
-    }
-
-    public int getId() {
-        return id;
     }
 
     @Override

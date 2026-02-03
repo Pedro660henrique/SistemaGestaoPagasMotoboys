@@ -1,7 +1,9 @@
-package Model;
+package Model.Repository;
 
-import Exceptions.BairroInvalidoException;
+import Model.Bairro;
+import Model.Exceptions.BairroInvalidoException;
 
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -10,9 +12,9 @@ public class CadastrarBairro {
 
     public CadastrarBairro() {
         // bairros fixos por enquanto
-        bairros.add(new Bairro(1, "Centro", 10.0));
-        bairros.add(new Bairro(2, "Bairro Alto", 12.0));
-        bairros.add(new Bairro(3, "Jardim", 15.0));
+        bairros.add(new Bairro(1, "Centro", new BigDecimal("10.00")));
+        bairros.add(new Bairro(2, "Bairro Alto", new BigDecimal("10.00")));
+        bairros.add(new Bairro(3, "Jardim", new BigDecimal("10.00")));
     }
 
     public void listarBairros() {
