@@ -8,107 +8,48 @@ import java.util.Scanner;
 
 public class InputUtils {
 
-    private InputUtils() {
-        // impede instanciação
-    }
-
-    // ==============================
-    // STRING
-    // ==============================
-    public static String lerString(Scanner sc, String mensagem) {
-        String texto;
-
-        do {
-            System.out.print(mensagem);
-            texto = sc.nextLine().trim();
-
-            if (texto.isEmpty()) {
-                System.out.println("Entrada inválida. Digite um texto válido.");
-            }
-
-        } while (texto.isEmpty());
-
-        return texto;
-    }
-
-    // ==============================
-    // INT
-    // ==============================
-    public static int lerInt(Scanner sc, String mensagem) {
+    public static int lerInt(Scanner sc, String msg) {
         while (true) {
             try {
-                System.out.print(mensagem);
-                String entrada = sc.nextLine().trim();
-                return Integer.parseInt(entrada);
+                System.out.print(msg);
+                return Integer.parseInt(sc.nextLine());
             } catch (NumberFormatException e) {
-                System.out.println("Valor inválido. Digite um número inteiro.");
+                System.out.println("Número inválido.");
             }
         }
     }
 
-    // ==============================
-    // BIGDECIMAL (VALOR MONETÁRIO)
-    // ==============================
-    public static BigDecimal lerBigDecimal(Scanner sc, String mensagem) {
+    public static BigDecimal lerBigDecimal(Scanner sc, String msg) {
         while (true) {
             try {
-                System.out.print(mensagem);
-                String entrada = sc.nextLine()
-                        .trim()
-                        .replace("R$", "")
-                        .replace(".", "")
-                        .replace(",", ".");
-
-                BigDecimal valor = new BigDecimal(entrada);
-
-                if (valor.compareTo(BigDecimal.ZERO) <= 0) {
-                    System.out.println("O valor deve ser maior que zero.");
-                    continue;
-                }
-
-                return valor;
-
-            } catch (NumberFormatException e) {
-                System.out.println("Valor inválido. Exemplo válido: 10,50");
+                System.out.print(msg);
+                return new BigDecimal(sc.nextLine().replace(",", "."));
+            } catch (Exception e) {
+                System.out.println("Valor inválido.");
             }
         }
     }
 
-    // ==============================
-    // S / N
-    // ==============================
-    public static char lerSN(Scanner sc, String mensagem) {
+    public static String lerString(Scanner sc, String msg) {
+        System.out.print(msg);
+        return sc.nextLine().trim();
+    }
+
+    public static String lerHorario(Scanner sc, String msg) {
         while (true) {
-            System.out.print(mensagem);
-            String entrada = sc.nextLine().trim().toLowerCase();
+            System.out.print(msg);
+            String h = sc.nextLine();
 
-            if (entrada.equals("s") || entrada.equals("n")) {
-                return entrada.charAt(0);
-            }
+            if (h.matches("^([01]\\d|2[0-3]):[0-5]\\d$"))
+                return h;
 
-            System.out.println("Resposta inválida. Digite 's' ou 'n'.");
+            System.out.println("Horário inválido (HH:mm)");
         }
     }
 
-    // ==============================
-    // FORMATAR VALOR (EXIBIÇÃO)
-    // ==============================
-    public static String formatarMoeda(BigDecimal valor) {
-        DecimalFormatSymbols symbols = new DecimalFormatSymbols(new Locale("pt", "BR"));
-        DecimalFormat df = new DecimalFormat("R$ #,##0.00", symbols);
-        return df.format(valor);
-    }
-
-    public static String lerHorario(Scanner sc, String mensagem) {
-        while (true) {
-            System.out.print(mensagem);
-            String horario = sc.nextLine().trim();
-
-            if (horario.matches("^([01]\\d|2[0-3]):[0-5]\\d$")) {
-                return horario;
-            }
-
-            System.out.println("Horário inválido. Use o formato HH:mm (ex: 11:00).");
-        }
+    public static char lerSN(Scanner sc, String msg) {
+        System.out.print(msg);
+        return sc.nextLine().toLowerCase().charAt(0);
     }
 }
+

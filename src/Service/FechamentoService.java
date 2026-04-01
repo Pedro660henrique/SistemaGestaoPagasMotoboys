@@ -14,12 +14,12 @@ public class FechamentoService {
 
     public FechamentoMotoboy iniciarFechamento(
             Motoboy motoboy,
-            String entrada,
-            String saida,
+            String horaEntrada,
+            String horaSaida,
             BigDecimal paga
     ) {
         FechamentoMotoboy fechamento = new FechamentoMotoboy(
-                motoboy, entrada, saida, paga
+                motoboy, horaEntrada, horaSaida, paga
         );
         fechamentos.add(fechamento);
         return fechamento;
@@ -33,11 +33,6 @@ public class FechamentoService {
         fechamento.fechar();
     }
 
-    // 🔍 localizar motoboy e adicionar caixinha depois
-    public void adicionarCaixinha(Motoboy motoboy, BigDecimal valor) {
-        FechamentoMotoboy fechamento = buscarFechamento(motoboy);
-        fechamento.adicionarCaixinha(valor);
-    }
 
     public void alterarPaga(Motoboy motoboy, BigDecimal novaPaga) {
         FechamentoMotoboy fechamento = buscarFechamento(motoboy);

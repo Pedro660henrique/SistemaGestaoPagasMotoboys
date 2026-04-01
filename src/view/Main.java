@@ -97,7 +97,7 @@ public class Main {
 
             if (alterarPaga == 's') {
                 BigDecimal novaPaga = InputUtils.lerBigDecimal(sc, "Nova paga do dia: R$ ");
-                fechamento.alterarPagaPeriodo(novaPaga);
+                fechamento.alterarPaga(novaPaga);
             }
 
             // Validação e fechamento
