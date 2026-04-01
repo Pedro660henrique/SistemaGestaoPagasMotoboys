@@ -5,7 +5,6 @@ import Model.Exceptions.FechamentoInvalidoException;
 import Model.Repository.CadastrarBairro;
 import Model.Repository.CadastrarMotoboy;
 import Model.Utils.InputUtils;
-import Service.FechamentoService;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -43,9 +42,7 @@ public class Main {
 
             BigDecimal pagaDia = InputUtils.lerBigDecimal(sc, "Valor da paga do dia: R$ ");
 
-            FechamentoService fechamentoService = new FechamentoService();
-
-            FechamentoMotoboy fechamento = fechamentoService.iniciarFechamento(
+                        FechamentoMotoboy fechamento = fechamentoService.iniciarFechamento(
                     motoboy,
                     horarioEntrada,
                     horarioSaida,
